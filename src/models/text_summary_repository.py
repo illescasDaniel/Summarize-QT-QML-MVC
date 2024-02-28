@@ -1,4 +1,5 @@
 from math import ceil
+from networkx import is_empty
 from transformers import pipeline, Pipeline
 from models.utils.app_utils import AppUtils
 from models.utils.torch_utils import TorchUtils
@@ -53,6 +54,9 @@ class TextSummaryRepository:
 					do_sample=False
 				) # type: ignore
 				text_output = output[0]['summary_text']
-				full_text += text_output
+				if len(full_text) == 0:
+					full_text += text_output
+				else:
+					full_text += f' {text_output}'
 			yield full_text
 		logging.debug('finished')
