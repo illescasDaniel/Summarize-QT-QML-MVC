@@ -1,7 +1,8 @@
 from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlApplicationEngine
-from controllers.TextSummaryController import TextSummaryController
+from controllers.text_summary_controller import TextSummaryController
 import sys
+from models.utils.app_utils import AppUtils
 from pathlib import Path
 
 if __name__ == "__main__":
@@ -13,13 +14,13 @@ if __name__ == "__main__":
 	context = engine.rootContext()
 	context.setContextProperty("textSummaryController", textSummaryController)
 
-	# Define the base path depending on whether we're frozen (via PyInstaller)
-	if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
-		base_path = Path(sys._MEIPASS) # type: ignore
+	if AppUtils.is_app_frozen():
+		py_installer_path = sys._MEIPASS # type: ignore
+		AppUtils.set_app_base_path(Path(py_installer_path))
 	else:
-		base_path = Path(__file__).resolve().parent
+		AppUtils.set_app_base_path(Path(__file__).resolve().parent)
 
-	qml_file_path = base_path / 'views' / 'main.qml'
+	qml_file_path = AppUtils.app_base_path() / 'views' / 'main.qml'
 	engine.load(qml_file_path)
 
 	if not engine.rootObjects():

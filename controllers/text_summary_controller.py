@@ -1,4 +1,4 @@
-from models.TextSummaryRepository import TextSummaryRepository
+from models.text_summary_repository import TextSummaryRepository
 from PySide6.QtCore import QObject, Signal, Slot
 from threading import Thread
 
