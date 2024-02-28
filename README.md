@@ -22,3 +22,15 @@ By default, when using `invoke run` (running the python app directly), the bart-
 ### TODOs:
 - [ ] Test installation on clean environments in Ubuntu, macOS and Windows.
 - [ ] Add unit tests with `pytest`.
+
+#### Acknowledgments
+
+This project makes use of the BART-CNN model developed by Facebook AI (now Meta AI) for text summarization. We are grateful for their efforts in creating and open-sourcing the model, which has significantly contributed to the capabilities of our application.
+
+#### License
+
+This software is released under the MIT License. See the LICENSE file for more details.
+
+Portions of this software incorporate the BART-CNN model, which is licensed under the "MIT License". For more details on the model and its license, please visit the official repository at [Bart-large-cnn](https://huggingface.co/facebook/bart-large-cnn).
+
+We adhere to the licensing terms specified by the BART-CNN model and appreciate the opportunity to build upon the work provided by Meta AI and the broader open-source community.
