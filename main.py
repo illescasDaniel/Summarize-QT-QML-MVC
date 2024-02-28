@@ -1,6 +1,6 @@
 from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlApplicationEngine
-from TextSummaryController import TextSummaryController
+from controllers.TextSummaryController import TextSummaryController
 import sys
 
 if __name__ == "__main__":
@@ -12,7 +12,7 @@ if __name__ == "__main__":
 	context = engine.rootContext()
 	context.setContextProperty("textSummaryController", textSummaryController)
 
-	engine.load("main.qml")
+	engine.load("views/main.qml")
 
 	if not engine.rootObjects():
 		sys.exit(-1)

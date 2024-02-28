@@ -1,6 +1,6 @@
 from math import ceil
 from transformers import pipeline
-from torch_utils import TorchUtils
+from models.utils.torch_utils import TorchUtils
 import numpy as np
 
 class TextSummaryRepository:
