@@ -3,7 +3,7 @@ Simple app to summarize text. Currently, it is using facebook's "bart-large-cnn"
 
 ![Program](assets/program.png)
 
-### requirements
+### Requirements
 - invoke (Optional, but recommended to easily build and run the app)
 - HuggingFace's transformers
 - Pytorch
@@ -15,7 +15,7 @@ Simple app to summarize text. Currently, it is using facebook's "bart-large-cnn"
 Install requirements inside src folder using `pip install -r requirements.txt` or `conda create --name <env> --file conda-requirements.txt`.
 Requirements generated using `pipreqs` and `conda`.
 
-## Invoke
+## Execution
 Use `invoke --list` for all available tasks, like `invoke build --snapshot-id=37f520fa929c961707657b28798b30c003dd100b` or `invoke run`.
 By default, when using `invoke run` (running the python app directly), the bart-larg-cnn model will be downloaded at `{home_path}/.cache/huggingface/hub/models--facebook--bart-large-cnn/snapshots/{snapshot_id}`.
 
