@@ -1,6 +1,8 @@
 # Summarize-QT-QML-MVC
 Simple app to summarize text. Currently, it is using facebook's "bart-large-cnn". This model has a 1024 tokens limit, but if you are using a larger input the app will split the input into multiple chunks of less or equal than 1024 tokens (so, more than 1024 tokens shouldn't be an issue).
 
+![Program](assets/program.png)
+
 ### requirements
 - invoke (Optional, but recommended to easily build and run the app)
 - HuggingFace's transformers
