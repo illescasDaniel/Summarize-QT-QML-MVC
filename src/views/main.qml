@@ -8,7 +8,7 @@ ApplicationWindow {
 	height: 600
 	title: "Text Summarizer"
 	ColumnLayout {
-		spacing: 10 // Adjust the spacing between elements in the column
+		spacing: 10
 		anchors.fill: parent
 
 		ScrollView {

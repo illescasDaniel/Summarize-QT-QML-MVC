@@ -6,8 +6,6 @@ from models.utils.app_utils import AppUtils
 from pathlib import Path
 import logging
 
-# TODO: move everything to a src folder
-
 if __name__ == "__main__":
 	app = QGuiApplication(sys.argv)
 	engine = QQmlApplicationEngine()
@@ -22,7 +20,8 @@ if __name__ == "__main__":
 		AppUtils.set_app_base_path(Path(py_installer_path))
 		AppUtils.set_up_logging(logging.WARNING)
 	else:
-		AppUtils.set_app_base_path(Path(__file__).resolve().parent)
+		app_path = Path(__file__).resolve().parent
+		AppUtils.set_app_base_path(app_path)
 		AppUtils.set_up_logging(logging.DEBUG)
 
 	qml_file_path = AppUtils.app_base_path() / 'views' / 'main.qml'
