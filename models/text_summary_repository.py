@@ -4,8 +4,8 @@ from models.utils.app_utils import AppUtils
 from models.utils.torch_utils import TorchUtils
 import numpy as np
 import torch
+import logging
 
-# TODO: please use a logger instead of prints...
 class TextSummaryRepository:
 
 	summarizer: Pipeline | None = None
@@ -13,13 +13,13 @@ class TextSummaryRepository:
 
 	def summarize(self, input_text):
 		if self.device is None:
-			print('Loading device')
+			logging.debug('Loading device')
 			with TorchUtils.get_device() as device:
 				self.device = device
 				TorchUtils.set_default_device(device)
-				print('device loaded')
+				logging.debug('device loaded')
 		if self.summarizer is None:
-			print('Loading model')
+			logging.debug('Loading model')
 			if AppUtils.is_app_frozen():
 				model_directory = AppUtils.app_base_path() / 'model_directory'
 				self.summarizer = pipeline(
@@ -34,7 +34,7 @@ class TextSummaryRepository:
 					model='facebook/bart-large-cnn', 
 					device=self.device
 				)
-			print('model loaded')
+			logging.debug('model loaded')
 		input_text_tokens =  input_text.split(' ')
 		max_tokens = 1024
 		full_text = str()
@@ -45,7 +45,7 @@ class TextSummaryRepository:
 			else:
 				max_length = int(min(float(text_tokens) / 1.5, 200.0))
 				min_length = int(min(30, max_length))
-				print(len(chunk), max_length, min_length)
+				logging.debug(f"chunk length:{len(chunk)}, max_length{max_length}, min_length{min_length}")
 				output: list[dict[str, str]] = self.summarizer(
 					' '.join(chunk), 
 					max_length=max_length, 
@@ -55,4 +55,4 @@ class TextSummaryRepository:
 				text_output = output[0]['summary_text']
 				full_text += text_output
 			yield full_text
-		print('finished')
+		logging.debug('finished')
