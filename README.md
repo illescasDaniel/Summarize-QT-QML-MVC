@@ -3,7 +3,7 @@ Simple app to summarize text. Currently, it is using facebook's "bart-large-cnn"
 
 ![Program](assets/program.png)
 
-### Requirements
+## Requirements
 - invoke (Optional, but recommended to easily build and run the app)
 - HuggingFace's transformers
 - Pytorch
@@ -17,20 +17,25 @@ Requirements generated using `pipreqs` and `conda`.
 
 ## Execution
 Use `invoke --list` for all available tasks, like `invoke build --snapshot-id=37f520fa929c961707657b28798b30c003dd100b` or `invoke run`.
-By default, when using `invoke run` (running the python app directly), the bart-larg-cnn model will be downloaded at `{home_path}/.cache/huggingface/hub/models--facebook--bart-large-cnn/snapshots/{snapshot_id}`.
+
+By default, when using `invoke run` (running the python app directly), the bart-large-cnn model will be downloaded at `{home_path}/.cache/huggingface/hub/models--facebook--bart-large-cnn/snapshots/{snapshot_id}`. There you can see the snapshot-id.
 
 ### TODOs:
 - [ ] Test installation on clean environments in Ubuntu, macOS and Windows.
 - [ ] Add unit tests with `pytest`.
 
+---
+
 #### Acknowledgments
 
-This project makes use of the BART-CNN model developed by Facebook AI (now Meta AI) for text summarization. We are grateful for their efforts in creating and open-sourcing the model, which has significantly contributed to the capabilities of our application.
+<sup>This project makes use of the **BART-CNN model** developed by Facebook AI (now Meta AI) for text summarization. We are grateful for their efforts in creating and open-sourcing the model, which has significantly contributed to the capabilities of our application.</sup>
+
+<sup>In addition, this application is built using the **Qt framework via PySide6**, the official set of Python bindings. The versatility and power of Qt have enabled us to create a robust, cross-platform user interface. Our thanks go to the Qt Company and the open-source contributors for making such a valuable resource available to the developer community.</sup>
 
 #### License
 
-This software is released under the MIT License. See the LICENSE file for more details.
+<sup>This software is released under the **MIT License**. See the LICENSE file for more details.</sup>
 
-Portions of this software incorporate the BART-CNN model, which is licensed under the "MIT License". For more details on the model and its license, please visit the official repository at [Bart-large-cnn](https://huggingface.co/facebook/bart-large-cnn).
+<sup>Portions of this software incorporate the **BART-CNN model**, which is licensed under the "MIT License". For more details on the model and its license, please visit the official repository at [Bart-large-cnn](https://huggingface.co/facebook/bart-large-cnn).</sup>
 
-We adhere to the licensing terms specified by the BART-CNN model and appreciate the opportunity to build upon the work provided by Meta AI and the broader open-source community.
+<sup>Additionally, this application makes use of the **Qt framework and PySide6**, licensed under the GNU Lesser General Public License (LGPL) version 3. We adhere to the licensing terms specified by these projects and appreciate the opportunity to build upon the work provided by the broader open-source community. For more information on Qt and its licensing, please visit [Qt Licensing](https://www.qt.io/licensing/).</sup>
