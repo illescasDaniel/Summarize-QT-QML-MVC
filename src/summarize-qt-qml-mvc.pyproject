@@ -1,0 +1,10 @@
+{
+    "files": [
+        "main.py",
+        "controllers/text_summary_controller.py",
+        "models/text_summary_repository.py",
+        "models/utils/app_utils.py",
+        "models/utils/torch_utils.py",
+        "views/main.qml"
+    ]
+}
