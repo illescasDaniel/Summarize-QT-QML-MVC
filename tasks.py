@@ -1,4 +1,4 @@
-from invoke import task
+from invoke.tasks import task
 from invoke.context import Context
 import os
 
@@ -22,9 +22,6 @@ def build(ctx: Context, snapshot_id: str):
 def run_executable(ctx: Context):
 	"""
 	Run the executable, located at './dist/main/main'.
-
-	Args:
-		ctx (Context): The context object.
 	
 	Example:
 		`invoke run-executable`
@@ -35,9 +32,6 @@ def run_executable(ctx: Context):
 def run_executable_debug_logging(ctx: Context):
 	"""
 	Run the executable, located at './dist/main/main', with DEBUG logging.
-
-	Args:
-		ctx (Context): The context object.
 	
 	Example:
 		`invoke run-executable-debug-logging`
@@ -47,8 +41,10 @@ def run_executable_debug_logging(ctx: Context):
 @task
 def generate_requirements(ctx: Context):
 	"""
-	Generates requirements.txt using pipreqs.
-	If pipreqs is not installed, it prints a helpful message.
+	Generate requirements.txt using `pipreqs` and `conda`.
+
+	Example:
+		`invoke generate-requirements`
 	"""
 	try:
 		ctx.run("pipreqs ./src --force")
@@ -65,9 +61,6 @@ def generate_requirements(ctx: Context):
 def run(ctx: Context):
 	"""
 	Run the main.py app. Make sure you have the necessary dependencies installed.
-	
-	Args:
-		ctx (Context): The invoke context object.
 	
 	Example:
 		`invoke run`
