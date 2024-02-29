@@ -1,6 +1,7 @@
 import torch
 import logging
 
+
 class TorchUtils:
 
 	@staticmethod
@@ -14,7 +15,7 @@ class TorchUtils:
 		else:
 			logging.warning("Using CPU")
 			return torch.device('cpu')
-	
+
 	@staticmethod
 	def set_default_device(device: torch.device):
 		torch.set_default_device(device)

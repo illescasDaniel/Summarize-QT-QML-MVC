@@ -23,6 +23,7 @@ By default, when using `invoke run` (running the python app directly), the bart-
 ### TODOs:
 - [ ] Test installation on clean environments in Ubuntu, macOS and Windows.
 - [ ] Add unit tests with `pytest`.
+- [ ] Try other models with bigger context.
 
 ---
 

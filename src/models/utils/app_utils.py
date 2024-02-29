@@ -3,8 +3,8 @@ import sys
 import logging
 import argparse
 
-class AppUtils:
 
+class AppUtils:
 	_app_base_path: Path
 
 	@staticmethod
@@ -14,11 +14,11 @@ class AppUtils:
 			return True
 		else:
 			return False
-		
+
 	@staticmethod
 	def app_base_path() -> Path:
 		return AppUtils._app_base_path
-	
+
 	@staticmethod
 	def set_app_base_path(base_path: Path):
 		AppUtils._app_base_path = base_path
@@ -27,22 +27,22 @@ class AppUtils:
 	def set_up_logging(logging_level: int):
 		parser = argparse.ArgumentParser(description="Run the application with specified logging level.")
 		parser.add_argument(
-			"--log", 
-			default=AppUtils._logging_to_string(logging_level), 
+			"--log",
+			default=AppUtils._logging_to_string(logging_level),
 			choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
 			help="Set the logging level (default: %(default)s)"
 		)
 
 		args = parser.parse_args()
-		
+
 		logging.basicConfig(level=getattr(logging, args.log),
-					format='%(asctime)s - %(levelname)s - %(message)s',
-					datefmt='%Y-%m-%d %H:%M:%S')
-	
+							format='%(asctime)s - %(levelname)s - %(message)s',
+							datefmt='%Y-%m-%d %H:%M:%S')
+
 	@staticmethod
 	def _logging_to_string(logging_level: int) -> str:
 		match logging_level:
-			case logging.CRITICAL: 
+			case logging.CRITICAL:
 				return 'CRITICAL'
 			case logging.ERROR:
 				return 'ERROR'

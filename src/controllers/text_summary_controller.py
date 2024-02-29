@@ -2,6 +2,7 @@ from models.text_summary_repository import TextSummaryRepository
 from PySide6.QtCore import QObject, Signal, Slot
 from threading import Thread
 
+
 class TextSummaryController(QObject):
 	summaryReady = Signal(str)
 	enableSummarizeButton = Signal(bool)
@@ -11,7 +12,7 @@ class TextSummaryController(QObject):
 		self.repository = TextSummaryRepository()
 
 	@Slot(str)
-	def summarize(self, input_text):
+	def summarize(self, input_text: str):
 		self.summaryReady.emit(str())
 		self.enableSummarizeButton.emit(False)
 		Thread(target=self.generate_summary, args=(input_text,)).start()
