@@ -39,25 +39,6 @@ def run_executable_debug_logging(ctx: Context):
 	ctx.run("./dist/main/main --log DEBUG")
 
 @task
-def generate_requirements(ctx: Context):
-	"""
-	Generate requirements.txt using `pipreqs` and `conda`.
-
-	Example:
-		`invoke generate-requirements`
-	"""
-	try:
-		ctx.run("pipreqs ./src --force")
-		print("requirements.txt generated successfully.")
-	except Exception as e:
-		print("An error occurred while generating requirements.txt: {}".format(e))
-		print("Make sure you have pipreqs installed by running `pip install pipreqs`")
-	try:
-		ctx.run('conda list --export > ./src/conda-requirements.txt')
-	except:
-		pass
-
-@task
 def run(ctx: Context):
 	"""
 	Run the main.py app. Make sure you have the necessary dependencies installed.
@@ -65,4 +46,4 @@ def run(ctx: Context):
 	Example:
 		`invoke run`
 	"""
-	ctx.run("python src/main.py")
+	ctx.run('python src/main.py')

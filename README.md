@@ -9,11 +9,22 @@ Simple app to summarize text. Currently, it is using facebook's "bart-large-cnn"
 - Pytorch
 - PySide6
 - numpy
-- GPU not required but highly recommended. It should work with NVIDIA GPUs, Apple Silicon chips and CPUs.
+- GPU not required but highly recommended. It works with NVIDIA GPUs, Apple Silicon chips and CPUs.
 
-## Installation
-Install requirements inside src folder using `pip install -r requirements.txt` or `conda create --name <env> --file conda-requirements.txt`.
-Requirements generated using `pipreqs` and `conda`.
+## Easy installation
+1. Clone repo.
+`git clone https://github.com/illescasDaniel/Summarize-QT-QML-MVC.git`
+`cd Summarize-QT-QML-MVC`
+2. Install conda (anaconda or miniconda).
+https://www.anaconda.com/download
+3. Create a conda environment with all its dependencies.
+`./install.sh`
+3. Activate the new environment.
+`conda activate Summarize-QT-QML-MVC`
+4. Run the app.
+`invoke run`
+
+**NOTE:** The first time you run it, after you press the "Summarize" button it will download the model, please be patient, you can see the progress in the terminal where you run the command.
 
 ## Execution
 Use `invoke --list` for all available tasks, like `invoke build --snapshot-id=37f520fa929c961707657b28798b30c003dd100b` or `invoke run`.
@@ -21,7 +32,7 @@ Use `invoke --list` for all available tasks, like `invoke build --snapshot-id=37
 By default, when using `invoke run` (running the python app directly), the bart-large-cnn model will be downloaded at `{home_path}/.cache/huggingface/hub/models--facebook--bart-large-cnn/snapshots/{snapshot_id}`. There you can see the snapshot-id.
 
 ### TODOs:
-- [ ] Test installation on clean environments in Ubuntu, macOS and Windows.
+- [ ] Test installation on clean environments in Ubuntu, macOS and Windows. Progress: tested on Ubuntu and macOS.
 - [ ] Add unit tests with `pytest`.
 - [ ] Try other models with bigger context.
 
