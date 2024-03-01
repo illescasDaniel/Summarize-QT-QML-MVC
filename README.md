@@ -2,8 +2,8 @@
 Simple app to summarize text. Currently, it is using facebook's "bart-large-cnn". This model has a 1024 tokens limit, but if you are using a larger input the app will split the input into multiple chunks of less or equal than 1024 tokens (so, more than 1024 tokens shouldn't be an issue).
 
 <p align="center">
-	<img src="assets/program_macOS.png" alt="Image 2" width="300" />
-	<img src="assets/program_gnome.png" alt="Image 2" width="300" />
+	<img src="assets/program_macOS.png" alt="macOS program program screenshot" width="300" />
+	<img src="assets/program_gnome.png" alt="linux GNOME program screenshot" width="300" />
 </p>
 
 
