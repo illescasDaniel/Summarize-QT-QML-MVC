@@ -5,6 +5,7 @@
         "models/text_summary_repository.py",
         "models/utils/app_utils.py",
         "models/utils/torch_utils.py",
-        "views/main.qml"
+        "views/main.qml",
+        "views/LoadingPopup.qml"
     ]
 }
