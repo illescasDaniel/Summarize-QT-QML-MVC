@@ -11,7 +11,8 @@ elif [ "$UNAME" = "darwin" ]; then
 	conda env create -f environment_macOS.yml
 # BSD
 elif [ "$UNAME" = "freebsd" ] || [ "$UNAME" = "netbsd" ] || [ "$UNAME" = "openbsd" ]; then
-	echo 'TODO?'
+	echo "Maybe Unsupported"
+	conda env create -f environment.yml
 else
-	echo 'Windows? TODO'
+	echo "Windows? Please use install.ps1 with Anaconda Powershell Prompt, outside of VSCode"
 fi

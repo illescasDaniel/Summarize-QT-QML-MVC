@@ -25,7 +25,7 @@ https://www.anaconda.com/download
 https://docs.anaconda.com/free/miniconda/
 3. Create a conda environment with all its dependencies.
 	- Ubuntu/macOS: `./install.sh`
-	- Windows (Anaconda Powershell Prompt, outside VSCode): `.\install.ps1`
+	- Windows (Anaconda Powershell Prompt, outside of VSCode): `.\install.ps1`
 3. Activate the new environment.
 `conda activate Summarize-QT-QML-MVC`
 4. Run the app.
