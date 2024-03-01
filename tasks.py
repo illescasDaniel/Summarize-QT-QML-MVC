@@ -5,7 +5,8 @@ import os
 @task
 def build(ctx: Context, snapshot_id: str):
 	'''
-	Build the application using PyInstaller.
+	Build the application using PyInstaller. Make sure to pass "--snapshot-id=your hugging face model id here".
+	($HOME/.cache/huggingface/hub/models--facebook--bart-large-cnn/snapshots/<snapshot id here>)
 
 	Args:
 		ctx (Context): The invoke context.

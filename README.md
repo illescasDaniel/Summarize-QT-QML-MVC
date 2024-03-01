@@ -33,6 +33,8 @@ You can use `invoke --list` for all available tasks, like `invoke build --snapsh
 
 **NOTE:** By default, when using `invoke run` (running the python app directly), the bart-large-cnn model will be downloaded at `{home_path}/.cache/huggingface/hub/models--facebook--bart-large-cnn/snapshots/{snapshot_id}`. There you can see the snapshot-id.
 
+**Note about `invoke build`**: on my macOS machine, after I run the invoke build command with the snapshot-id a recursion failure appears, if that happens to you, you may add `import sys ; sys.setrecursionlimit(sys.getrecursionlimit() * 5)` on top of the `main.spec` file (generated because of pyinstaller) and run `pyinstaller main.spec`; unfortunately it still doesn't work on my mac, it gives me the following error: `importlib.metadata.PackageNotFoundError: No package metadata was found for The 'tqdm>=4.27' distribution was not found and is required by this application.`
+
 ### TODOs:
 - [ ] Test installation on clean environments in Ubuntu, macOS and Windows. 
 	- [x] Ubuntu
