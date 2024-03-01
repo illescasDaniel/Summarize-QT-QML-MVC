@@ -2,8 +2,9 @@
 Simple app to summarize text. Currently, it is using facebook's "bart-large-cnn". This model has a 1024 tokens limit, but if you are using a larger input the app will split the input into multiple chunks of less or equal than 1024 tokens (so, more than 1024 tokens shouldn't be an issue).
 
 <p align="center">
-	<img src="assets/program_macOS.png" alt="macOS program program screenshot" width="300" />
+	<img src="assets/program_macOS.png" alt="macOS program screenshot" width="300" />
 	<img src="assets/program_gnome.png" alt="linux GNOME program screenshot" width="300" />
+	<img src="assets/program_windows.png" alt="windows program screenshot" width="300" />
 </p>
 
 
@@ -21,8 +22,10 @@ Simple app to summarize text. Currently, it is using facebook's "bart-large-cnn"
 `cd Summarize-QT-QML-MVC`
 2. Install conda (anaconda or miniconda).
 https://www.anaconda.com/download
+https://docs.anaconda.com/free/miniconda/
 3. Create a conda environment with all its dependencies.
-`./install.sh`
+	- Ubuntu/macOS: `./install.sh`
+	- Windows (Anaconda Powershell Prompt, outside VSCode): `.\install.ps1`
 3. Activate the new environment.
 `conda activate Summarize-QT-QML-MVC`
 4. Run the app.
@@ -40,10 +43,6 @@ You can use `invoke --list` for all available tasks, like `invoke build --snapsh
 **Note about `invoke build`**: on my macOS machine, after I run the invoke build command with the snapshot-id a recursion failure appears, if that happens to you, you may add `import sys ; sys.setrecursionlimit(sys.getrecursionlimit() * 5)` on top of the `main.spec` file (generated because of pyinstaller) and run `pyinstaller main.spec`; unfortunately it still doesn't work on my mac, it gives me the following error: `importlib.metadata.PackageNotFoundError: No package metadata was found for The 'tqdm>=4.27' distribution was not found and is required by this application.`
 
 ### TODOs:
-- [ ] Test installation on clean environments in Ubuntu, macOS and Windows.
-	- [x] Ubuntu
-	- [x] MacOS
-	- [ ] Windows
 - [ ] Add unit tests with `pytest`.
 - [ ] Try other models with bigger context.
 
