@@ -1,3 +1,17 @@
 #!/bin/sh
 
-conda env create -f src/environment.yml
+# Detect OS platform
+UNAME=$(uname | tr "[:upper:]" "[:lower:]")
+
+# Linux
+if [ "$UNAME" = "linux" ]; then
+	echo 'TODO'
+# macOS
+elif [ "$UNAME" = "darwin" ]; then
+	conda env create -f environment_macOS.yml
+# BSD
+elif [ "$UNAME" = "freebsd" ] || [ "$UNAME" = "netbsd" ] || [ "$UNAME" = "openbsd" ]; then
+	echo 'TODO?'
+else
+	echo 'Windows? TODO'
+fi
