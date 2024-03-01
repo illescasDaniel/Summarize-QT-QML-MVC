@@ -9,7 +9,7 @@ def build(ctx: Context, snapshot_id: str):
 
 	Args:
 		ctx (Context): The invoke context.
-		snapshot_id (str): The ID of the snapshot for the model directory.
+		snapshot_id (str): The ID of the hugging face model snapshot.
 
 	Example:
 		`invoke build --snapshot-id=37f520fa929c961707657b28798b30c003dd100b`
@@ -22,7 +22,7 @@ def build(ctx: Context, snapshot_id: str):
 def run_executable(ctx: Context):
 	"""
 	Run the executable, located at './dist/main/main'.
-	
+
 	Example:
 		`invoke run-executable`
 	"""
@@ -32,7 +32,7 @@ def run_executable(ctx: Context):
 def run_executable_debug_logging(ctx: Context):
 	"""
 	Run the executable, located at './dist/main/main', with DEBUG logging.
-	
+
 	Example:
 		`invoke run-executable-debug-logging`
 	"""
@@ -42,7 +42,7 @@ def run_executable_debug_logging(ctx: Context):
 def run(ctx: Context):
 	"""
 	Run the main.py app. Make sure you have the necessary dependencies installed.
-	
+
 	Example:
 		`invoke run`
 	"""
