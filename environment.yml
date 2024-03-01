@@ -1,0 +1,16 @@
+name: Summarize-QT-QML-MVC
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pytorch
+  - torchvision
+  - torchaudio
+  - pytorch-cuda=12.1
+  - numpy
+  - pyside6
+  - transformers
+  - invoke

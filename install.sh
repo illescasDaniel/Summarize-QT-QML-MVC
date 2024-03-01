@@ -5,7 +5,7 @@ UNAME=$(uname | tr "[:upper:]" "[:lower:]")
 
 # Linux
 if [ "$UNAME" = "linux" ]; then
-	echo 'TODO'
+	conda env create -f environment.yml
 # macOS
 elif [ "$UNAME" = "darwin" ]; then
 	conda env create -f environment_macOS.yml
