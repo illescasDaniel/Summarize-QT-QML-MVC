@@ -3,10 +3,12 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 ApplicationWindow {
+	id: window
 	visible: true
 	width: 800
 	height: 600
 	title: "Text Summarizer"
+
 	ColumnLayout {
 		spacing: 10
 		anchors.fill: parent
@@ -42,13 +44,21 @@ ApplicationWindow {
 		}
 	}
 
+	Loader {
+		id: popupLoader
+		source: "LoadingPopup.qml"
+		asynchronous: true
+		// active: textSummaryController.isLoading
+	}
+
 	Connections {
 		target: textSummaryController
 		function onSummaryReady(summary) {
 			outputText.text = summary
 		}
-		function onEnableSummarizeButton(enabled) {
-			summarizeButton.enabled = enabled
+		function onIsLoading(enabled) {
+			summarizeButton.enabled = !enabled
+			popupLoader.item.visible = enabled
 		}
 	}
 }
