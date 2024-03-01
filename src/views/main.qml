@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import QtQuick.Controls.Universal
 
 ApplicationWindow {
 	id: window
@@ -9,12 +8,6 @@ ApplicationWindow {
 	width: 600
 	height: 480
 	title: "Text Summarizer"
-	
-	Component.onCompleted: {
-		if (Qt.platform.os === "windows") {
-			Universal.theme = Universal.System
-		}
-	}
 
 	ColumnLayout {
 		spacing: 10

@@ -1,12 +1,12 @@
-from collections.abc import Generator
+import logging
 from math import ceil
+from collections.abc import Generator
 from typing import Any
+import torch
+import numpy as np
 from transformers import pipeline, Pipeline
 from models.utils.app_utils import AppUtils
 from models.utils.torch_utils import TorchUtils
-import numpy as np
-import torch
-import logging
 
 
 class TextSummaryRepository:

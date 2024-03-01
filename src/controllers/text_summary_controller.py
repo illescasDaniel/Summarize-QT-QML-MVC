@@ -1,7 +1,6 @@
-from time import sleep
-from models.text_summary_repository import TextSummaryRepository
-from PySide6.QtCore import QObject, Signal, Slot
 from threading import Thread
+from PySide6.QtCore import QObject, Signal, Slot
+from models.text_summary_repository import TextSummaryRepository
 
 
 class TextSummaryController(QObject):

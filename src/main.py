@@ -1,13 +1,21 @@
+import platform
+import sys
+import logging
+from pathlib import Path
 from PySide6.QtGui import QGuiApplication
 from PySide6.QtQml import QQmlApplicationEngine
+from PySide6.QtQuickControls2 import QQuickStyle
 from controllers.text_summary_controller import TextSummaryController
-import sys
 from models.utils.app_utils import AppUtils
-from pathlib import Path
-import logging
 
 if __name__ == "__main__":
 	app = QGuiApplication(sys.argv)
+
+	if platform.system() == 'Windows':
+		QQuickStyle.setStyle("Universal")
+	else:
+		QQuickStyle.setStyle("Default")
+
 	engine = QQmlApplicationEngine()
 
 	textSummaryController = TextSummaryController()
