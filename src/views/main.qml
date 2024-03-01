@@ -5,8 +5,8 @@ import QtQuick.Layouts
 ApplicationWindow {
 	id: window
 	visible: true
-	width: 800
-	height: 600
+	width: 600
+	height: 480
 	title: "Text Summarizer"
 
 	ColumnLayout {
