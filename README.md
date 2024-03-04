@@ -16,9 +16,8 @@ Simple app to summarize text. Currently, it is using facebook's "bart-large-cnn"
 - numpy
 - GPU not required but highly recommended. It works with NVIDIA GPUs, Apple Silicon chips and CPUs.
 
-## Easy installation
-1. Clone the repo.
-`git clone https://github.com/illescasDaniel/Summarize-QT-QML-MVC.git`
+## Easy installation using conda (Anaconda/miniconda)
+1. Clone the repo. `git clone https://github.com/illescasDaniel/Summarize-QT-QML-MVC.git`
 `cd Summarize-QT-QML-MVC`
 2. Install conda (anaconda or miniconda).
 https://www.anaconda.com/download
@@ -26,10 +25,23 @@ https://docs.anaconda.com/free/miniconda/
 3. Create a conda environment with all its dependencies.
 	- Ubuntu/macOS: `./install.sh`
 	- Windows (Anaconda Powershell Prompt, outside of VSCode): `.\install.ps1`
-3. Activate the new environment.
-`conda activate Summarize-QT-QML-MVC`
-4. Run the app.
-`invoke run`
+3. Activate the new environment: `conda activate Summarize-QT-QML-MVC`
+4. Run the app: `invoke run`
+
+**Note:** this is the preferred way, since using pip won't use your system theme.
+
+**NOTE:** The first time you run it, after you press the "Summarize" button it will download the model, please be patient, you can see the progress in the terminal where you run the command.
+
+## Easy installation using pip
+1. Clone the repo.
+`git clone https://github.com/illescasDaniel/Summarize-QT-QML-MVC.git`
+`cd Summarize-QT-QML-MVC`
+2. Create a virtual environment: `python3 -m venv summarize-env`
+3. Activate the new environment: `source summarize-env/bin/activate`
+4. Install dependencies: `pip3 install -r requirements.txt`
+4. Run the app with `python3 src/main.py` or install `invoke` with `pip3 install invoke` and then `invoke run`.
+
+**Note**: <sup>"Having Qt installed in your system will not interfere with your PySide6 installation if you do it via pip install, because the Python packages (wheels) include already Qt binaries. Most notably, style plugins from the system won’t have any effect on PySide applications." source: https://doc.qt.io/qtforpython-6/quickstart.html </sup> This means you won't use your system's default style if you use pip to install pyside6, AFAIK.
 
 **NOTE:** The first time you run it, after you press the "Summarize" button it will download the model, please be patient, you can see the progress in the terminal where you run the command.
 
