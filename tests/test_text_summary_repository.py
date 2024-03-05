@@ -13,7 +13,7 @@ def mock_pipeline():
 def test_given_input_when_summarize_then_smaller_text_expected(mock_pipeline):
 	# Given a normal text with more than 30 words
 	mock_pipeline_function, mock_pipeline_object = mock_pipeline
-	# this below would be equivalent to: mock_pipeline_object.__call__ = ..., but that doesn't work
+	# this below would be equivalent to: mock_pipeline_object.__call__.return_value = ..., but that doesn't work
 	mock_pipeline_object.return_value = [{'summary_text': 'This is a summary.'}]
 
 	repository = TextSummaryRepository()

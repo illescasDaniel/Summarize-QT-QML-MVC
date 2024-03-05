@@ -1,7 +1,8 @@
+from enum import Enum
 import logging
 from math import ceil
 from collections.abc import Generator
-from typing import Any
+from typing import Any, Optional
 import torch
 import numpy as np
 from transformers import pipeline, Pipeline
@@ -10,8 +11,10 @@ from models.utils.torch_utils import TorchUtils
 
 
 class TextSummaryRepository:
-	__summarizer: Pipeline | None = None
-	__device: torch.device | None = None
+	__summarizer: Optional[Pipeline] = None
+	__device: Optional[torch.device] = None
+	__MIN_TOKENS: int = 30
+	__MAX_TOKENS: int = 1024
 
 	def initialize(self, device: torch.device | None):
 		if device is None:
@@ -45,15 +48,15 @@ class TextSummaryRepository:
 		if self.__device is None or self.__summarizer is None:
 			raise AttributeError('No device or summarizer, you must call initialize first')
 		input_text_tokens = input_text.split(' ')
-		max_tokens = 1024
+		max_tokens = TextSummaryRepository.__MAX_TOKENS
 		full_text = str()
 		for chunk in np.array_split(input_text_tokens, indices_or_sections=ceil(len(input_text_tokens) / max_tokens)):
 			text_tokens: int = len(chunk)
-			if text_tokens <= 30:
+			if text_tokens <= TextSummaryRepository.__MIN_TOKENS:
 				full_text += ' '.join(chunk)
 			else:
-				max_length = int(max(float(text_tokens) * 0.5, text_tokens))
-				min_length = text_tokens
+				max_length = int(min(max(TextSummaryRepository.__MIN_TOKENS, float(text_tokens) * 0.5), text_tokens))
+				min_length = TextSummaryRepository.__MIN_TOKENS
 				logging.debug(f"chunk length:{len(chunk)}, max_length{max_length}, min_length{min_length}")
 				output: list[dict[str, str]] = self.__summarizer(
 					' '.join(chunk),

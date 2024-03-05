@@ -86,8 +86,8 @@ def test_reports(ctx: Context):
 	'''
 	Run pytest to execute unit tests.
 	'''
-	project_root = "./src"
-	tests_root = "./tests"
-	os.environ["PYTHONPATH"] = f"{os.environ.get('PYTHONPATH')}:{project_root}:{tests_root}"
+	project_root = "./"
+	source_code_root = "./src"
+	os.environ["PYTHONPATH"] = f"{os.environ.get('PYTHONPATH')}:{project_root}:{source_code_root}"
 
 	ctx.run('pytest --color=yes --cov=src/ --cov-report xml tests/')
