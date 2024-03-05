@@ -1,5 +1,5 @@
-import platform
 import sys
+import platform
 import logging
 from pathlib import Path
 from PySide6.QtGui import QGuiApplication
@@ -7,6 +7,7 @@ from PySide6.QtQml import QQmlApplicationEngine
 from PySide6.QtQuickControls2 import QQuickStyle
 from controllers.text_summary_controller import TextSummaryController
 from models.utils.app_utils import AppUtils
+
 
 if __name__ == "__main__":
 	app = QGuiApplication(sys.argv)

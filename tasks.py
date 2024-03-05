@@ -6,7 +6,8 @@ import os
 def build(ctx: Context, snapshot_id: str):
 	'''
 	Build the application using PyInstaller. Make sure to pass "--snapshot-id=your hugging face model id here".
-	($HOME/.cache/huggingface/hub/models--facebook--bart-large-cnn/snapshots/<snapshot id here>)
+	($HOME/.cache/huggingface/hub/models--facebook--bart-large-cnn/snapshots/<snapshot id here>).
+	After running the command successfully, run the executable with `invoke run-executable`.
 
 	Args:
 		ctx (Context): The invoke context.
@@ -22,6 +23,7 @@ def build(ctx: Context, snapshot_id: str):
 	except Exception as e:
 		print(f'An error occurred while building the executable: {e}')
 		print('Make sure you have "pyinstaller" installed by running "conda install pyinstaller" or "pip install pyinstaller"')
+		print('If you have recursion limits, simply add "import sys ; sys.setrecursionlimit(sys.getrecursionlimit() * 5)" at the beggining of the "main.spec" file, then run "pyinstaller main.spec"')
 
 @task
 def run_executable(ctx: Context):
@@ -61,9 +63,31 @@ def generate_requirements(ctx: Context):
 @task
 def run(ctx: Context):
 	'''
-	Run the main.py app. Make sure you have the necessary dependencies installed and your python executable or symlink is named `python`.
+	Run the main.py app. Make sure you have the necessary dependencies installed.
 
 	Example:
 		`invoke run`
 	'''
-	ctx.run('python src/main.py')
+	ctx.run('python3 src/main.py')
+
+@task
+def test(ctx: Context):
+	'''
+	Run pytest to execute unit tests.
+	'''
+	project_root = "./src"
+	tests_root = "./tests"
+	os.environ["PYTHONPATH"] = f"{os.environ.get('PYTHONPATH')}:{project_root}:{tests_root}"
+
+	ctx.run("pytest --color=yes")
+
+@task
+def test_reports(ctx: Context):
+	'''
+	Run pytest to execute unit tests.
+	'''
+	project_root = "./src"
+	tests_root = "./tests"
+	os.environ["PYTHONPATH"] = f"{os.environ.get('PYTHONPATH')}:{project_root}:{tests_root}"
+
+	ctx.run('pytest --color=yes --cov=src/ --cov-report xml tests/')

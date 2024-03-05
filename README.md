@@ -16,6 +16,11 @@ Simple app to summarize text. Currently, it is using facebook's "bart-large-cnn"
 - numpy
 - GPU not required but highly recommended. It works with NVIDIA GPUs, Apple Silicon chips and CPUs.
 
+## Development requirements
+- pytest (unit tests)
+- pyinstaller (create executable in tasks.py)
+- pipreqs (genereate requirements.txt in tasks.py)
+
 ## Easy installation using conda (Anaconda/miniconda)
 1. Clone the repo. `git clone https://github.com/illescasDaniel/Summarize-QT-QML-MVC.git`
 `cd Summarize-QT-QML-MVC`

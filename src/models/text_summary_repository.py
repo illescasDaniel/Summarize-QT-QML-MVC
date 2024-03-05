@@ -10,33 +10,40 @@ from models.utils.torch_utils import TorchUtils
 
 
 class TextSummaryRepository:
-	summarizer: Pipeline | None = None
-	device: torch.device | None = None
+	__summarizer: Pipeline | None = None
+	__device: torch.device | None = None
 
-	def summarize(self, input_text: str) -> Generator[str, Any, None]:
-		if self.device is None:
+	def initialize(self, device: torch.device | None):
+		if device is None:
 			logging.debug('Loading device')
 			with TorchUtils.get_device() as device:
-				self.device = device
+				self.__device = device
 				TorchUtils.set_default_device(device)
 				logging.debug('device loaded')
-		if self.summarizer is None:
+		else:
+			self.__device = device
+
+		if self.__summarizer is None:
 			logging.debug('Loading model')
 			if AppUtils.is_app_frozen():
 				model_directory = AppUtils.app_base_path() / 'model_directory'
-				self.summarizer = pipeline(
+				self.__summarizer = pipeline(
 					task='summarization',
 					model=str(model_directory),
 					tokenizer=str(model_directory),
-					device=self.device
+					device=self.__device
 				)
 			else:
-				self.summarizer = pipeline(
+				self.__summarizer = pipeline(
 					task='summarization',
 					model='facebook/bart-large-cnn',
-					device=self.device
+					device=self.__device
 				)
 			logging.debug('model loaded')
+
+	def summarize(self, input_text: str) -> Generator[str, Any, None]:
+		if self.__device is None or self.__summarizer is None:
+			raise AttributeError('No device or summarizer, you must call initialize first')
 		input_text_tokens = input_text.split(' ')
 		max_tokens = 1024
 		full_text = str()
@@ -45,10 +52,10 @@ class TextSummaryRepository:
 			if text_tokens <= 30:
 				full_text += ' '.join(chunk)
 			else:
-				max_length = int(min(float(text_tokens) / 1.5, 200.0))
-				min_length = int(min(30, max_length))
+				max_length = int(max(float(text_tokens) * 0.5, text_tokens))
+				min_length = text_tokens
 				logging.debug(f"chunk length:{len(chunk)}, max_length{max_length}, min_length{min_length}")
-				output: list[dict[str, str]] = self.summarizer(
+				output: list[dict[str, str]] = self.__summarizer(
 					' '.join(chunk),
 					max_length=max_length,
 					min_length=min_length,
