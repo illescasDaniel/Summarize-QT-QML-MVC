@@ -60,8 +60,10 @@ You can use `invoke --list` for all available tasks, use `invoke --help <command
 **Note about `invoke build`**: on my macOS machine, after I run the invoke build command with the snapshot-id a recursion failure appears, if that happens to you, you may add `import sys ; sys.setrecursionlimit(sys.getrecursionlimit() * 5)` on top of the `main.spec` file (generated because of pyinstaller) and run `pyinstaller main.spec`; unfortunately it still doesn't work on my mac, it gives me the following error: `importlib.metadata.PackageNotFoundError: No package metadata was found for The 'tqdm>=4.27' distribution was not found and is required by this application.`
 
 ### TODOs:
-- [x] Add unit tests with `pytest` [WIP].
-- [ ] Try other models with bigger context.
+- [ ] Add unit tests with `pytest`.
+	- [x] text_summary_repository.py
+	- [ ] torch_utils.py
+	- [ ] app_utils.py
 
 ---
 
