@@ -80,8 +80,8 @@ def test(
 	source_code_root = './src'
 	os.environ['PYTHONPATH'] = f'{os.environ.get("PYTHONPATH")}:{project_root}:{source_code_root}'
 
-	# -rP: shows prints even if test passes
 	pytest_command = 'pytest --color=yes'
+	# -rP: shows prints even if test passes
 	if show_prints:
 		pytest_command += f' -rP'
 	if logging_level is not None:

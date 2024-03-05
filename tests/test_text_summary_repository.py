@@ -1,10 +1,9 @@
 import pytest
 from pathlib import Path
 from unittest.mock import MagicMock, patch
-
-from regex import P
 from src.models.text_summary_repository import TextSummaryRepository
 from utils.generator_tracker import GeneratorTracker
+
 
 def test_given_input_when_summarize_then_summarized_text_expected(mock_pipeline, mock_torch_utils):
 	mock_pipeline_function, mock_pipeline_object = mock_pipeline
