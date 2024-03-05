@@ -1,4 +1,3 @@
-from enum import Enum
 import logging
 from math import ceil
 from collections.abc import Generator
@@ -16,7 +15,7 @@ class TextSummaryRepository:
 	__MIN_TOKENS: int = 30
 	__MAX_TOKENS: int = 1024
 
-	def initialize(self, device: torch.device | None):
+	def initialize(self, device: Optional[torch.device] = None):
 		if device is None:
 			logging.debug('Loading device')
 			with TorchUtils.get_device() as device:
@@ -49,11 +48,10 @@ class TextSummaryRepository:
 			raise AttributeError('No device or summarizer, you must call initialize first')
 		input_text_tokens = input_text.split(' ')
 		max_tokens = TextSummaryRepository.__MAX_TOKENS
-		full_text = str()
 		for chunk in np.array_split(input_text_tokens, indices_or_sections=ceil(len(input_text_tokens) / max_tokens)):
 			text_tokens: int = len(chunk)
 			if text_tokens <= TextSummaryRepository.__MIN_TOKENS:
-				full_text += ' '.join(chunk)
+				yield ' '.join(chunk)
 			else:
 				max_length = int(min(max(TextSummaryRepository.__MIN_TOKENS, float(text_tokens) * 0.5), text_tokens))
 				min_length = TextSummaryRepository.__MIN_TOKENS
@@ -65,9 +63,5 @@ class TextSummaryRepository:
 					do_sample=False
 				)  # type: ignore
 				text_output = output[0]['summary_text']
-				if len(full_text) == 0:
-					full_text += text_output
-				else:
-					full_text += f' {text_output}'
-			yield full_text
+				yield text_output
 		logging.debug('finished')

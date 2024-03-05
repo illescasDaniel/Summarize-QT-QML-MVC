@@ -1,12 +1,15 @@
+from typing import Optional
 from invoke.tasks import task
 from invoke.context import Context
 import os
 
-@task
+
+@task(help={
+	'snapshot_id': 'Your hugging face model id, found at $HOME/.cache/huggingface/hub/models--facebook--bart-large-cnn/snapshots/<snapshot id here>'
+})
 def build(ctx: Context, snapshot_id: str):
 	'''
-	Build the application using PyInstaller. Make sure to pass "--snapshot-id=your hugging face model id here".
-	($HOME/.cache/huggingface/hub/models--facebook--bart-large-cnn/snapshots/<snapshot id here>).
+	Build the application using PyInstaller.
 	After running the command successfully, run the executable with `invoke run-executable`.
 
 	Args:
@@ -29,9 +32,6 @@ def build(ctx: Context, snapshot_id: str):
 def run_executable(ctx: Context):
 	'''
 	Run the executable, located at './dist/main/main'.
-
-	Example:
-		`invoke run-executable`
 	'''
 	ctx.run('./dist/main/main')
 
@@ -39,9 +39,6 @@ def run_executable(ctx: Context):
 def run_executable_debug_logging(ctx: Context):
 	'''
 	Run the executable, located at './dist/main/main', with DEBUG logging.
-
-	Example:
-		`invoke run-executable-debug-logging`
 	'''
 	ctx.run('./dist/main/main --log DEBUG')
 
@@ -49,9 +46,6 @@ def run_executable_debug_logging(ctx: Context):
 def generate_requirements(ctx: Context):
 	'''
 	Generate requirements.txt using `pipreqs`.
-
-	Example:
-		`invoke generate-requirements`
 	'''
 	try:
 		ctx.run("pipreqs ./src --savepath ./requirements.txt --force")
@@ -64,30 +58,48 @@ def generate_requirements(ctx: Context):
 def run(ctx: Context):
 	'''
 	Run the main.py app. Make sure you have the necessary dependencies installed.
-
-	Example:
-		`invoke run`
 	'''
 	ctx.run('python3 src/main.py')
 
-@task
-def test(ctx: Context):
+@task(help={
+	'show_prints': 'Force pytest to show prints even if the test passes.',
+	'logging_level': 'Optional: specific logging level. None by default.',
+	'test_name': 'Optional: specific test method to run. All by default.',
+})
+def test(
+	ctx: Context,
+		show_prints: bool = True,
+		logging_level: Optional[str] = None,
+		test_name: Optional[str] = None
+	):
 	'''
 	Run pytest to execute unit tests.
+	If a test_name is provided, only that test will be run.
 	'''
-	project_root = "./"
-	source_code_root = "./src"
-	os.environ["PYTHONPATH"] = f"{os.environ.get('PYTHONPATH')}:{project_root}:{source_code_root}"
+	project_root = './'
+	source_code_root = './src'
+	os.environ['PYTHONPATH'] = f'{os.environ.get("PYTHONPATH")}:{project_root}:{source_code_root}'
 
-	ctx.run("pytest --color=yes")
+	# -rP: shows prints even if test passes
+	pytest_command = 'pytest --color=yes'
+	if show_prints:
+		pytest_command += f' -rP'
+	if logging_level is not None:
+		pytest_command += f' --log-cli-level={logging_level}'
+	# If a test name is provided, format the command to run that specific test
+	if test_name is not None:
+		pytest_command += f' -k {test_name}'
+
+	ctx.run(pytest_command)
+
 
 @task
-def test_reports(ctx: Context):
+def test_report(ctx: Context):
 	'''
-	Run pytest to execute unit tests.
+	Run pytest to execute unit tests with coverage.
 	'''
-	project_root = "./"
-	source_code_root = "./src"
-	os.environ["PYTHONPATH"] = f"{os.environ.get('PYTHONPATH')}:{project_root}:{source_code_root}"
+	project_root = './'
+	source_code_root = './src'
+	os.environ['PYTHONPATH'] = f'{os.environ.get("PYTHONPATH")}:{project_root}:{source_code_root}'
 
 	ctx.run('pytest --color=yes --cov=src/ --cov-report xml tests/')

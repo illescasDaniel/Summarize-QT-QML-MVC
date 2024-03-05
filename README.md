@@ -53,14 +53,14 @@ https://docs.anaconda.com/free/miniconda/
 ## Execution
 Use `invoke run` to run the python app.
 
-You can use `invoke --list` for all available tasks, like `invoke build --snapshot-id=37f520fa929c961707657b28798b30c003dd100b` to build an executable using `pyinstaller`.
+You can use `invoke --list` for all available tasks, use `invoke --help <command>` to get help about a specific command.
 
-**NOTE:** By default, when using `invoke run` (running the python app directly), the bart-large-cnn model will be downloaded at `{home_path}/.cache/huggingface/hub/models--facebook--bart-large-cnn/snapshots/{snapshot_id}`. There you can see the snapshot-id.
+<sup>You can use `invoke build --snapshot-id=37f520fa929c961707657b28798b30c003dd100b` to build an executable using `pyinstaller`, just use your specific snapshot id from `{home_path}/.cache/huggingface/hub/models--facebook--bart-large-cnn/snapshots/{snapshot_id}` after you first run the app with `invoke run`.</sup>
 
 **Note about `invoke build`**: on my macOS machine, after I run the invoke build command with the snapshot-id a recursion failure appears, if that happens to you, you may add `import sys ; sys.setrecursionlimit(sys.getrecursionlimit() * 5)` on top of the `main.spec` file (generated because of pyinstaller) and run `pyinstaller main.spec`; unfortunately it still doesn't work on my mac, it gives me the following error: `importlib.metadata.PackageNotFoundError: No package metadata was found for The 'tqdm>=4.27' distribution was not found and is required by this application.`
 
 ### TODOs:
-- [ ] Add unit tests with `pytest`.
+- [x] Add unit tests with `pytest` [WIP].
 - [ ] Try other models with bigger context.
 
 ---

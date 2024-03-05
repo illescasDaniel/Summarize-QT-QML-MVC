@@ -21,8 +21,13 @@ class TextSummaryController(QObject):
 
 	def generate_summary(self, input_text: str):
 		if not self.is_initialized:
-			self.repository.initialize(None)
+			self.repository.initialize()
 			self.is_initialized = True
+		full_text = str()
 		for output_chunk in self.repository.summarize(input_text):
-			self.summaryReady.emit(output_chunk)
+			if len(full_text) == 0:
+				full_text += output_chunk
+			else:
+				full_text += f' {output_chunk}'
+			self.summaryReady.emit(full_text)
 		self.isLoading.emit(False)
