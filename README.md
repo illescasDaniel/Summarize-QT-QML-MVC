@@ -48,10 +48,11 @@ https://docs.anaconda.com/free/miniconda/
 
 **Note**: <sup>"Having Qt installed in your system will not interfere with your PySide6 installation if you do it via pip install, because the Python packages (wheels) include already Qt binaries. Most notably, style plugins from the system won’t have any effect on PySide applications." source: https://doc.qt.io/qtforpython-6/quickstart.html </sup> This means you won't use your system's default style if you use pip to install pyside6, AFAIK.
 
-**NOTE:** The first time you run it, after you press the "Summarize" button it will download the model, please be patient, you can see the progress in the terminal where you run the command.
 
 ## Execution
 Use `invoke run` to run the python app.
+
+**The first time you run it, after you press the "Summarize" button it will download the model, please be patient, you can see the progress in the terminal where you run the command.**
 
 You can use `invoke --list` for all available tasks, use `invoke --help <command>` to get help about a specific command.
 
