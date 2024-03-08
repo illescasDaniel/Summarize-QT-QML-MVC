@@ -7,6 +7,8 @@ ApplicationWindow {
 	visible: true
 	width: 600
 	height: 480
+	minimumWidth: 600
+	minimumHeight: 480
 	title: "Text Summarizer"
 
 	ColumnLayout {
