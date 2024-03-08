@@ -13,3 +13,7 @@ dependencies:
   - numpy
   - transformers
   - invoke
+  - pip
+  - pip:
+    - pyside6
+
