@@ -6,6 +6,21 @@ import os
 
 
 @task(help={
+	'log_level': 'Optional: specify the log level.',
+})
+def run(ctx: Context, log_level: Optional[str] = None):
+	'''
+	Run the main.py app. Make sure you have the necessary dependencies installed.
+
+	Args:
+		log_level (Optional[str]): The log level, like DEBUG or WARNING.
+	'''
+	execute_command = f'{get_python_command()} src/main.py'
+	if log_level is not None:
+		execute_command += f' --log {log_level}'
+	ctx.run(execute_command)
+
+@task(help={
 	'snapshot_id': 'Your hugging face model id, found at $HOME/.cache/huggingface/hub/models--facebook--bart-large-cnn/snapshots/<snapshot id here>'
 })
 def build(ctx: Context, snapshot_id: str):
@@ -54,13 +69,6 @@ def generate_requirements(ctx: Context):
 	except Exception as e:
 		print(f'An error occurred while generating requirements.txt: {e}')
 		print('Make sure you have pipreqs installed by running "conda install pireqs" or "pip install pipreqs"')
-
-@task
-def run(ctx: Context):
-	'''
-	Run the main.py app. Make sure you have the necessary dependencies installed.
-	'''
-	ctx.run(f'{get_python_command()} src/main.py')
 
 @task(help={
 	'show_prints': 'Force pytest to show prints even if the test passes.',
