@@ -17,7 +17,7 @@ def run(ctx: Context, log_level: Optional[str] = None):
 	'''
 	execute_command = f'{get_python_command()} src/main.py'
 	if log_level is not None:
-		execute_command += f' --log {log_level}'
+		execute_command += f' --log-level {log_level}'
 	ctx.run(execute_command)
 
 @task(help={
